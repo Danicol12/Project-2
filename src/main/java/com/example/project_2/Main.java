@@ -17,7 +17,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         Game game =new Game();
-        game.showMatrix();
+
     }
 
     public static void main(String[] args) {
