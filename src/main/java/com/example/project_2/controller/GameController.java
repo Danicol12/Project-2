@@ -4,6 +4,7 @@ import com.example.project_2.view.GameStage;
 import com.example.project_2.view.WelcomeStage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +22,10 @@ public class GameController {
     @FXML
     private ImageView livesImageView;
 
+    @FXML
+    private Label remainingLivesTxt;
+
+
     public void initialize() {
         Image gameImage = new Image(getClass().getResource("/com/example/project_2/images/game-bg.png").toExternalForm());
         gameImageView.setImage(gameImage);
@@ -37,6 +42,9 @@ public class GameController {
 
         Image fiveLives = new Image(getClass().getResource("/com/example/project_2/images/5-lives.png").toExternalForm());
         livesImageView.setImage(fiveLives);
+
+        remainingLivesTxt.setEffect(new ImageInput(new Image(getClass().getResource("/com/example/project_2/images/remaining-lives.png").toExternalForm())));
+
     }
 
     public void returnAction() throws IOException {
