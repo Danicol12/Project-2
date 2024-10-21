@@ -18,6 +18,9 @@ public class GameController {
     @FXML
     private Button returnButton;
 
+    @FXML
+    private ImageView livesImageView;
+
     public void initialize() {
         Image gameImage = new Image(getClass().getResource("/com/example/project_2/images/game-bg.png").toExternalForm());
         gameImageView.setImage(gameImage);
@@ -31,6 +34,9 @@ public class GameController {
         returnButton.setOnMouseReleased(event -> {
             returnButton.setEffect(new ImageInput(returnImage));
         });
+
+        Image fiveLives = new Image(getClass().getResource("/com/example/project_2/images/5-lives.png").toExternalForm());
+        livesImageView.setImage(fiveLives);
     }
 
     public void returnAction() throws IOException {
