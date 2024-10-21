@@ -98,6 +98,8 @@ public class SudokuMatrix {
         }
     }
 
+    public String getNumber(int row, int col) {return this.SudokuMatrix[row].get(col);}
+
 
     public void fillAuxNumbers() {
         for (int i = 0; i < 6; i++) {
