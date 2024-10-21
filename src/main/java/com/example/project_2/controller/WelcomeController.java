@@ -26,12 +26,16 @@ public void initialize() {
         Image welcomeImage = new Image(getClass().getResource("/com/example/project_2/images/welcome-bg.jpg").toExternalForm());
         welcomeImageView.setImage(welcomeImage);
 
-        playButton.setEffect(new ImageInput(new Image(getClass().getResource("/com/example/project_2/images/play-button.png").toExternalForm())));
+        Image playButtonPressed = new Image(getClass().getResource("/com/example/project_2/images/play-button-pressed.png").toExternalForm());
+        Image playButtonImage =new Image(getClass().getResource("/com/example/project_2/images/play-button.png").toExternalForm());
+        playButton.setEffect(new ImageInput(playButtonImage));
 
-//        Image playButtonPressed = new Image(getClass().getResource("/com/example/project_2/images/play-button.png").toExternalForm());
-//        playButton.setOnMousePressed(event -> {
-//            playButton.setEffect(new ImageInput(playButtonPressed));
-//        });
+        playButton.setOnMousePressed(event -> {
+            playButton.setEffect(new ImageInput(playButtonPressed));
+        });
+        playButton.setOnMouseReleased(event -> {
+            playButton.setEffect(new ImageInput(playButtonImage));
+        });
     }
 
     public void handlePlay(ActionEvent actionEvent) {
