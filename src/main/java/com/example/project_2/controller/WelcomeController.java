@@ -1,5 +1,7 @@
 package com.example.project_2.controller;
 
+import com.example.project_2.view.GameStage;
+import com.example.project_2.view.WelcomeStage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +10,8 @@ import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
 
 public class WelcomeController {
 
@@ -38,7 +42,8 @@ public void initialize() {
         });
     }
 
-    public void handlePlay(ActionEvent actionEvent) {
-
+    public void handlePlay(ActionEvent actionEvent) throws IOException {
+        GameStage.getInstance();
+        WelcomeStage.deleteInstance();
     }
 }
