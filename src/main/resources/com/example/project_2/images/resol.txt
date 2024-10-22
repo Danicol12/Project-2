@@ -1,0 +1,4 @@
+Resolución imagen inicio
+1600x888
+resolución imagen fondo juego
+1753x1080

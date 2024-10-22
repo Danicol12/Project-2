@@ -1,32 +1,49 @@
 package com.example.project_2.controller;
 
+import com.example.project_2.view.GameStage;
+import com.example.project_2.view.WelcomeStage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
+
 public class WelcomeController {
+
     @FXML
-    private Label welcomeText;
+    private Button playButton;
 
     @FXML
     private AnchorPane welcomePane;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    private ImageView welcomeImageView;
 
     @FXML
 public void initialize() {
 
         Image welcomeImage = new Image(getClass().getResource("/com/example/project_2/images/welcome-bg.jpg").toExternalForm());
-        welcomePane.setEffect(new ImageInput(welcomeImage));
+        welcomeImageView.setImage(welcomeImage);
+
+        Image playButtonPressed = new Image(getClass().getResource("/com/example/project_2/images/play-button-pressed.png").toExternalForm());
+        Image playButtonImage =new Image(getClass().getResource("/com/example/project_2/images/play-button.png").toExternalForm());
+        playButton.setEffect(new ImageInput(playButtonImage));
+
+        playButton.setOnMousePressed(event -> {
+            playButton.setEffect(new ImageInput(playButtonPressed));
+        });
+        playButton.setOnMouseReleased(event -> {
+            playButton.setEffect(new ImageInput(playButtonImage));
+        });
     }
 
-    public void handlePlay(ActionEvent actionEvent) {
-
+    public void handlePlay(ActionEvent actionEvent) throws IOException {
+        GameStage.getInstance();
+        WelcomeStage.deleteInstance();
     }
 }

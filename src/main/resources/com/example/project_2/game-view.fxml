@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ImageInput?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_2.controller.GameController">
+   <children>
+      <ImageView fx:id="gameImageView" fitHeight="493.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" />
+      <GridPane layoutX="112.0" layoutY="95.0" prefHeight="329.0" prefWidth="332.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9500" height="415.0" layoutX="501.0" layoutY="56.0" opacity="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="264.0" />
+      <Button fx:id="returnButton" layoutX="661.0" layoutY="366.0" mnemonicParsing="false" onAction="#returnAction" prefHeight="70.0" prefWidth="70.0" text="Button">
+         <effect>
+            <ImageInput />
+         </effect>
+      </Button>
+      <ImageView fx:id="livesImageView" fitHeight="32.0" fitWidth="182.0" layoutX="554.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="remainingLivesTxt" alignment="CENTER" contentDisplay="CENTER" layoutX="559.0" layoutY="79.0" prefHeight="32.0" prefWidth="172.0" text="Vidas Restantes" textAlignment="CENTER">
+         <font>
+            <Font name="Footlight MT Light" size="23.0" />
+         </font>
+         <effect>
+            <ImageInput />
+         </effect>
+      </Label>
+   </children>
+</AnchorPane>
