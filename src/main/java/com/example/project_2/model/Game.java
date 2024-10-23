@@ -30,14 +30,15 @@ public class Game {
     public void checkWinCondition() {
         if(points==24){gameStatus=1;}
     }
-    public int numberComprobation(String word) {
+    public boolean numberComprobation(String word) {
 
         String regex = "^[1-6]+$";
         //munero correcto
         if (word.matches(regex)) {
-            System.out.println("Es apto");return 0;}
+            System.out.println("Es apto");return true;}
         //Caracter incorrecto, no cobrar vida
-        else {return 1;}
+        else {
+            System.out.println("no es apto"); return false;}
 
     }
 

@@ -1,13 +1,18 @@
 package com.example.project_2.controller;
 
+import com.example.project_2.model.Game;
 import com.example.project_2.view.GameStage;
 import com.example.project_2.view.WelcomeStage;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 
@@ -15,6 +20,10 @@ public class GameController {
 
     @FXML
     private ImageView gameImageView;
+    @FXML
+    private GridPane gridPane;
+    private Game game;
+    private TextField[][] txt;
 
     @FXML
     private Button returnButton;
@@ -27,9 +36,11 @@ public class GameController {
 
 
     public void initialize() {
+        game=new Game();
+        txt=new TextField[6][6];
         Image gameImage = new Image(getClass().getResource("/com/example/project_2/images/game-bg.png").toExternalForm());
         gameImageView.setImage(gameImage);
-
+        createTextField();
         Image returnImagePressed = new Image(getClass().getResource(("/com/example/project_2/images/return-button-pressed.png")).toExternalForm());
         Image returnImage = new Image(getClass().getResource(("/com/example/project_2/images/return-button.png")).toExternalForm());
         returnButton.setEffect(new ImageInput(returnImage));
@@ -46,6 +57,38 @@ public class GameController {
         remainingLivesTxt.setEffect(new ImageInput(new Image(getClass().getResource("/com/example/project_2/images/remaining-lives.png").toExternalForm())));
 
     }
+    public void createTextField(){
+        //Rows
+        for(int i =0; i<6;i++) {
+            //Columns
+            for (int f = 0; f < 2; f++) {
+                txt[i][f] = new TextField();
+                onKeyTxtPressed(txt[i][f],i,f);
+                gridPane.add(txt[i][f],f,i);
+
+
+            }
+        }
+
+
+    }
+private void onKeyTxtPressed(final TextField txt, final int row, final int col) {
+
+        txt.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            public void handle(KeyEvent keyEvent) {
+            if(game.getRemainingLives()!=0 && !keyEvent.getText().isEmpty() && txt.isEditable()){
+                System.out.println(txt.getText());
+                if (!game.numberComprobation(keyEvent.getText())) {
+                    txt.setText("");
+
+                }
+
+
+            }
+
+            }
+        });
+}
 
     public void returnAction() throws IOException {
         WelcomeStage.getInstance();
