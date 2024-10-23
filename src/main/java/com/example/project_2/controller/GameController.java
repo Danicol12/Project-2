@@ -86,6 +86,7 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
                     if (game.isNumberCorrect(keyEvent.getText(), row, col)) {
                         System.out.println("Son iguales");
                         txt.setStyle("-fx-background-color: green;");
+                        txt.setEditable(false);
 
 
                         game.setPoints(game.getPoints()+1);
