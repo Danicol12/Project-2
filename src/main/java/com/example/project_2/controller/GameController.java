@@ -25,6 +25,9 @@ public class GameController {
     @FXML
     private Label remainingLivesTxt;
 
+    @FXML
+    private Button hintButton;
+
 
     public void initialize() {
         Image gameImage = new Image(getClass().getResource("/com/example/project_2/images/game-bg.png").toExternalForm());
@@ -45,6 +48,16 @@ public class GameController {
 
         remainingLivesTxt.setEffect(new ImageInput(new Image(getClass().getResource("/com/example/project_2/images/remaining-lives.png").toExternalForm())));
 
+        Image hintImage = new Image(getClass().getResource("/com/example/project_2/images/hint-button.png").toExternalForm());
+        Image hintPressed = new Image(getClass().getResource("/com/example/project_2/images/pressed-hint.png").toExternalForm());
+        hintButton.setEffect(new ImageInput(hintImage));
+
+        hintButton.setOnMousePressed(event -> {
+            hintButton.setEffect(new ImageInput(hintPressed));
+        });
+        hintButton.setOnMouseReleased(event -> {
+            hintButton.setEffect(new ImageInput(hintImage));
+        });
     }
 
     public void returnAction() throws IOException {

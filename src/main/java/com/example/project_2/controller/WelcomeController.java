@@ -40,6 +40,7 @@ public void initialize() {
         playButton.setOnMouseReleased(event -> {
             playButton.setEffect(new ImageInput(playButtonImage));
         });
+
     }
 
     public void handlePlay(ActionEvent actionEvent) throws IOException {
