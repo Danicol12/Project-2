@@ -113,9 +113,10 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
                         game.setPoints(game.getPoints()+1);
                         System.out.println("Llevas "+game.getPoints());
                     } else if (!game.isNumberCorrect(keyEvent.getText(), row, col)) {
+                        game.setRemainingLives(game.getRemainingLives()-1);
                         System.out.println("No son  iguales");
-
-
+                        heartsChange();
+                        messageLabel.setText("Ups... Parece que te equivocaste");
                     }
                 }
 
@@ -145,6 +146,21 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
         }
 
 
+    }
+
+    public void heartsChange(){
+        if(game.getRemainingLives()== 4){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/4-lives.png").toExternalForm()));
+        }
+        if(game.getRemainingLives()== 3){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/3-lives.png").toExternalForm()));
+        }
+        if(game.getRemainingLives()== 2){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/2-lives.png").toExternalForm()));
+        }
+        if(game.getRemainingLives()== 1){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/1-live.png").toExternalForm()));
+        }
     }
 
 }
