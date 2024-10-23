@@ -5,6 +5,8 @@ import com.example.project_2.view.WelcomeStage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.Scene;
+
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +18,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Game game = new Game();
+
         WelcomeStage.getInstance();
     }
 }
