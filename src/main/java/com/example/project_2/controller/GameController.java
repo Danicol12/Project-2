@@ -74,10 +74,7 @@ public class GameController {
 
 
     }
-    public void setInitialNumbers(){
 
-
-    }
 private void onKeyTxtPressed(final TextField txt, final int row, final int col) {
 
         txt.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -100,10 +97,6 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
                     }
                 }
 
-                if (!game.numberComprobation(keyEvent.getText())) {
-                    txt.setText("");
-
-                }
 
 
             }
