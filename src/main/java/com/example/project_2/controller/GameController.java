@@ -61,14 +61,20 @@ public class GameController {
         //Rows
         for(int i =0; i<6;i++) {
             //Columns
-            for (int f = 0; f < 2; f++) {
+            for (int f = 0; f < 6; f++) {
                 txt[i][f] = new TextField();
                 onKeyTxtPressed(txt[i][f],i,f);
                 gridPane.add(txt[i][f],f,i);
-
-
+                if(game.getInitialNumber(i, f)==1){
+                    txt[i][f].setText(game.getNumber(i, f));
+                    txt[i][f].setEditable(false);
+                }
             }
         }
+
+
+    }
+    public void setInitialNumbers(){
 
 
     }
@@ -77,7 +83,23 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
         txt.setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent keyEvent) {
             if(game.getRemainingLives()!=0 && !keyEvent.getText().isEmpty() && txt.isEditable()){
-                System.out.println(txt.getText());
+                if(game.numberComprobation(keyEvent.getText())) {
+                    System.out.println(txt.getText());
+                    System.out.println("La fila es" + row + "La columna es" + col);
+                    if (game.isNumberCorrect(keyEvent.getText(), row, col)) {
+                        System.out.println("Son iguales");
+                        txt.setStyle("-fx-background-color: green;");
+
+
+                        game.setPoints(game.getPoints()+1);
+                        System.out.println("Llevas "+game.getPoints());
+                    } else if (!game.isNumberCorrect(keyEvent.getText(), row, col)) {
+                        System.out.println("No son  iguales");
+
+
+                    }
+                }
+
                 if (!game.numberComprobation(keyEvent.getText())) {
                     txt.setText("");
 

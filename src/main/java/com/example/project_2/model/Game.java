@@ -42,13 +42,15 @@ public class Game {
 
     }
 
-
+    public int   getPoints(){return points;}
     public void setPoints(int points) {this.points = points;}
     public int getGameStatus() {return gameStatus;}
     public int getHintNumber() {return hintNumber;}
     public int getRemainingLives() {return remainingLives;}
     public void setRemainingLives(int remainingLives) {this.remainingLives = remainingLives;}
     public void setHintNumber(int hintNumber) {this.hintNumber = hintNumber;}
+    public int getInitialNumber(int row, int col) {return sudokuMatrix.getInitialNumber(row, col);}
+    public String getNumber(int row, int col){return sudokuMatrix.getNumber(row,col);}
 
 
 }
