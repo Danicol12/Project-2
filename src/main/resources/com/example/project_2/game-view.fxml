@@ -40,14 +40,14 @@
             <ImageInput />
          </effect>
       </Label>
-      <Button fx:id="hintButton" layoutX="540.0" layoutY="366.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="70.0" text="Button">
+      <Button fx:id="hintButton" layoutX="540.0" layoutY="366.0" mnemonicParsing="false" onAction="#hintAction" prefHeight="66.0" prefWidth="70.0" text="Button">
          <effect>
             <ImageInput />
          </effect>
       </Button>
-      <Label fx:id="messagesLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="526.0" layoutY="198.0" prefHeight="66.0" prefWidth="214.0" text="ytfufiuygouyg8" textAlignment="CENTER">
+      <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="526.0" layoutY="198.0" prefHeight="83.0" prefWidth="214.0" textAlignment="CENTER">
          <font>
-            <Font name="Old English Text MT" size="15.0" />
+            <Font name="Old English Text MT" size="20.0" />
          </font>
       </Label>
    </children>

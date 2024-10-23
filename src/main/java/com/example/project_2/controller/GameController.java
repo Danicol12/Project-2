@@ -28,6 +28,12 @@ public class GameController {
     @FXML
     private Button hintButton;
 
+    @FXML
+    private Label messageLabel;
+
+    int hintCounter = 0;
+    int mistakesCounter = 0;
+
 
     public void initialize() {
         Image gameImage = new Image(getClass().getResource("/com/example/project_2/images/game-bg.png").toExternalForm());
@@ -58,11 +64,28 @@ public class GameController {
         hintButton.setOnMouseReleased(event -> {
             hintButton.setEffect(new ImageInput(hintImage));
         });
+
+        messageLabel.setWrapText(true);
     }
 
     public void returnAction() throws IOException {
         WelcomeStage.getInstance();
         GameStage.deleteInstance();
+    }
+
+    public void hintAction()  {
+        hintCounter++;
+        if (hintCounter > 3) {
+            messageLabel.setText("Ups... parece que no tienes más pistas");
+        } else if (hintCounter == 3) {
+            messageLabel.setText("Esa fué tu última pista :(");
+        } else if (hintCounter == 2) {
+            messageLabel.setText("Te queda solo una pista...");
+        } else if (hintCounter == 1) {
+            messageLabel.setText("Todavía tienes dos pistas");
+        }
+
+
     }
 
 }
