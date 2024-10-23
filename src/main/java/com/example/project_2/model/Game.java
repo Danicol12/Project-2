@@ -8,14 +8,20 @@ import com.example.project_2.model.SudokuMatrix;
 public class Game {
 
     private SudokuMatrix sudokuMatrix;
-    private ArrayList<String>[] SudokuMatrix = new ArrayList[6];
-    private int[] auxNumbers = new int[6];
-    private Random rand = new Random();
+    private int points=0;
+
 
     public Game() {
         sudokuMatrix = new SudokuMatrix();
+        System.out.println(sudokuMatrix.getNumber(1,0));
 
     }
+
+    public boolean isNumberCorrect(String number, int row, int col ) {
+        return sudokuMatrix.getNumber(row, col).equals(number);
+    }
+
+
 }
 
 
