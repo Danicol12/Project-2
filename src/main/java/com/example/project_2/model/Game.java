@@ -28,7 +28,7 @@ public class Game {
         return sudokuMatrix.getNumber(row, col).equals(number);
     }
     public void checkWinCondition() {
-        if(points==24){gameStatus=1;}
+        if(points==24){gameStatus=1;} else if (remainingLives==0) {gameStatus=2;}
     }
     public boolean numberComprobation(String word) {
 
