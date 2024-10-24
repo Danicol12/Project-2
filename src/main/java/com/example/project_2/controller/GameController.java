@@ -166,6 +166,9 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
         if(game.getRemainingLives()== 1){
             livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/1-live.png").toExternalForm()));
         }
+        if(game.getRemainingLives()== 0){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/0-lives.png").toExternalForm()));
+        }
     }
 
 }
