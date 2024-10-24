@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.Random;
 import com.example.project_2.model.SudokuMatrix;
 
-public class Game {
+public class Game extends AMethods{
 
     private SudokuMatrix sudokuMatrix;
     private int points=0;

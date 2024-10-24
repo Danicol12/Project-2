@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 
-public class SudokuMatrix {
+public class SudokuMatrix extends AMethods{
 
     private ArrayList<String>[] SudokuMatrix;
     private int[] auxNumbers;

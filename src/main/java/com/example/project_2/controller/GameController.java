@@ -103,6 +103,7 @@ public class GameController {
                 gridPane.add(txt[i][f],f,i);
                 if(game.getInitialNumber(i, f)==1){
                     txt[i][f].setText(game.getNumber(i, f));
+                    txt[i][f].setStyle("-fx-background-color: transparent; -fx-text-fill: #00ff00;-fx-font-size: 23; -fx-alignment: center; -fx-font: Old English Text MT");
                     txt[i][f].setEditable(false);
                 }
             }
