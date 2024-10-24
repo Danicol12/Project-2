@@ -40,8 +40,6 @@ public class GameController {
     @FXML
     private Label messageLabel;
 
-    int hintCounter = 0;
-    int mistakesCounter = 0;
 
 
     public void initialize() {
@@ -100,27 +98,36 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
 
         txt.setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent keyEvent) {
-            if(game.getRemainingLives()!=0 && !keyEvent.getText().isEmpty() && txt.isEditable()){
-                if(game.numberComprobation(keyEvent.getText())) {
-                    System.out.println(txt.getText());
-                    System.out.println("La fila es" + row + "La columna es" + col);
-                    if (game.isNumberCorrect(keyEvent.getText(), row, col)) {
-                        System.out.println("Son iguales");
-                        txt.setStyle("-fx-background-color: green;");
+              int lenght = txt.getText().length();
+              if(lenght == 1) {
+                  if (game.getRemainingLives() != 0 && !keyEvent.getText().isEmpty() && txt.isEditable()) {
+                      System.out.println("peneeeeeeeeeeeeeeeeeeee");
+                      System.out.println(txt.getText().length());
+                      if (game.numberComprobation(keyEvent.getText())) {
+                          System.out.println(txt.getText());
+                          System.out.println("La fila es" + row + "La columna es" + col);
+                          if (game.isNumberCorrect(keyEvent.getText(), row, col)) {
+                              System.out.println("Son iguales");
+                              txt.setStyle("-fx-background-color: green;");
+                              txt.setEditable(false);
 
 
-                        game.setPoints(game.getPoints()+1);
-                        System.out.println("Llevas "+game.getPoints());
-                    } else if (!game.isNumberCorrect(keyEvent.getText(), row, col)) {
-                        System.out.println("No son  iguales");
+                              game.setPoints(game.getPoints() + 1);
+                              System.out.println("Llevas " + game.getPoints());
+                          } else if (!game.isNumberCorrect(keyEvent.getText(), row, col)) {
+                              game.setRemainingLives(game.getRemainingLives() - 1);
+                              System.out.println("No son  iguales");
+                              heartsChange();
+                              messageLabel.setText("Ups... Parece que te equivocaste");
+                          }
+                      }
 
 
-                    }
-                }
-
-
-
-            }
+                  }
+              } else if (lenght != 1) {
+                  messageLabel.setText("Ingresa solo un caracter");
+                  txt.setText("");
+              }
 
             }
         });
@@ -132,18 +139,33 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
     }
 
     public void hintAction()  {
-        hintCounter++;
-        if (hintCounter > 3) {
+        game.setHintNumber(game.getHintNumber()+1);
+        if (game.getHintNumber() > 3) {
             messageLabel.setText("Ups... parece que no tienes más pistas");
-        } else if (hintCounter == 3) {
+        } else if (game.getHintNumber() == 3) {
             messageLabel.setText("Esa fué tu última pista :(");
-        } else if (hintCounter == 2) {
+        } else if (game.getHintNumber() == 2) {
             messageLabel.setText("Te queda solo una pista...");
-        } else if (hintCounter == 1) {
+        } else if (game.getHintNumber() == 1) {
             messageLabel.setText("Todavía tienes dos pistas");
         }
 
 
+    }
+
+    public void heartsChange(){
+        if(game.getRemainingLives()== 4){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/4-lives.png").toExternalForm()));
+        }
+        if(game.getRemainingLives()== 3){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/3-lives.png").toExternalForm()));
+        }
+        if(game.getRemainingLives()== 2){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/2-lives.png").toExternalForm()));
+        }
+        if(game.getRemainingLives()== 1){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/1-live.png").toExternalForm()));
+        }
     }
 
 }
