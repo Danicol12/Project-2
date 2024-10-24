@@ -181,6 +181,7 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
                         game.checkWinCondition();
                         if (game.getGameStatus() == 2) {
                             System.out.println("Perdiste");
+                            blockAllTxt();
                         }
                         setWinOrLose();
 
@@ -239,34 +240,44 @@ public void setWinOrLose(){
     }
 }
 
+public void blockAllTxt(){
+        for(int i=0;i<6;i++){
+            for (int f = 0; f < 6; f++) {
+                txt[i][f].setEditable(false);
+            }
+        }
+}
+
 
     public void hintAction() {
 
-        System.out.println(game.getHintNumber());
-        int rand1 = 0;
-        int rand2 = 0;
-        if (game.getHintNumber()<3) {
-            game.setPoints(game.getPoints() + 1);
-            System.out.println("Puntos: "+game.getPoints());
-            do {
-                rand1 = rand.nextInt(6);
-                rand2 = rand.nextInt(6);
-            } while (!txt[rand1][rand2].getText().isEmpty());
-            txt[rand1][rand2].setText(game.getNumber(rand1, rand2));
-            txt[rand1][rand2].setEditable(false);
-            txt[rand1][rand2].setStyle("-fx-background-color: transparent; -fx-font-weight: bold; -fx-text-fill: #00ff00;-fx-font-size: 23; -fx-alignment: center; -fx-font: Old English Text MT");
-            game.setHintNumber(game.getHintNumber()+1);
-            if (game.getHintNumber() == 3) {
-                messageLabel.setText("Esa fué tu última pista :(");
-            } else if (game.getHintNumber() == 2) {
-                messageLabel.setText("Te queda solo una pista...");
-            } else if (game.getHintNumber() == 1) {
-                messageLabel.setText("Todavía tienes dos pistas");
+        if(game.getGameStatus()!=1 && game.getGameStatus()!=2) {
+            System.out.println(game.getHintNumber());
+            int rand1 = 0;
+            int rand2 = 0;
+            if (game.getHintNumber() < 3) {
+                game.setPoints(game.getPoints() + 1);
+                System.out.println("Puntos: " + game.getPoints());
+                do {
+                    rand1 = rand.nextInt(6);
+                    rand2 = rand.nextInt(6);
+                } while (!txt[rand1][rand2].getText().isEmpty());
+                txt[rand1][rand2].setText(game.getNumber(rand1, rand2));
+                txt[rand1][rand2].setEditable(false);
+                txt[rand1][rand2].setStyle("-fx-background-color: transparent; -fx-font-weight: bold; -fx-text-fill: #00ff00;-fx-font-size: 23; -fx-alignment: center; -fx-font: Old English Text MT");
+                game.setHintNumber(game.getHintNumber() + 1);
+                if (game.getHintNumber() == 3) {
+                    messageLabel.setText("Esa fué tu última pista :(");
+                } else if (game.getHintNumber() == 2) {
+                    messageLabel.setText("Te queda solo una pista...");
+                } else if (game.getHintNumber() == 1) {
+                    messageLabel.setText("Todavía tienes dos pistas");
+                }
             }
 
-        }
-        if (game.getHintNumber()>=3) {
-            messageLabel.setText("Ups... parece que no tienes más pistas");
+            if (game.getHintNumber() >= 3) {
+                messageLabel.setText("Ups... parece que no tienes más pistas");
+            }
         }
     }
 
