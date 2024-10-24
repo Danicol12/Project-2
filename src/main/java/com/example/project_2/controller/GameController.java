@@ -3,6 +3,8 @@ package com.example.project_2.controller;
 import com.example.project_2.model.Game;
 import com.example.project_2.view.GameStage;
 import com.example.project_2.view.WelcomeStage;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,8 +15,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Random;
 
@@ -86,6 +93,7 @@ public class GameController {
             for (int f = 0; f < 6; f++) {
                 txt[i][f] = new TextField();
                 onKeyTxtPressed(txt[i][f],i,f);
+                focusedProperty(txt[i][f],i,f);
                 gridPane.add(txt[i][f],f,i);
                 if(game.getInitialNumber(i, f)==1){
                     txt[i][f].setText(game.getNumber(i, f));
@@ -186,7 +194,32 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
 
     });
 }
+public void focusedProperty(TextField textField, int fil, int col) {
+        textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+            showRelatedSquares(fil, col);
+            }
+        });
+}
+public void showRelatedSquares(int row,int col){
 
+    for(int i =0; i<6;i++) {
+        //Columns
+        for (int f = 0; f < 6; f++) {
+            txt[i][f].setBackground((new Background(new BackgroundFill(Color.rgb(199, 181, 175, 0.0), CornerRadii.EMPTY, null))));
+        }
+    }
+        for(int i=0;i<6;i++){
+           //txt[i][row].setStyle("-fx-background-color: red;");
+            txt[row][i].setBackground((new Background(new BackgroundFill(Color.rgb(199, 181, 175, 0.4), CornerRadii.EMPTY, null))));
+        }
+    for(int i=0;i<6;i++){
+        txt[i][col].setBackground((new Background(new BackgroundFill(Color.rgb(199, 181, 175, 0.4), CornerRadii.EMPTY, null))));
+    }
+
+
+}
 public void setWinOrLose(){
         if (game.getGameStatus() == 1) {
         messageLabel.setText("Ganaste el juego ");
@@ -214,7 +247,6 @@ public void setWinOrLose(){
             } while (!txt[rand1][rand2].getText().isEmpty());
             txt[rand1][rand2].setText(game.getNumber(rand1, rand2));
             txt[rand1][rand2].setEditable(false);
-            txt[rand1][rand2].setStyle("-fx-background-color: green;");
             game.setHintNumber(game.getHintNumber()+1);
             if (game.getHintNumber() == 3) {
                 messageLabel.setText("Esa fué tu última pista :(");
