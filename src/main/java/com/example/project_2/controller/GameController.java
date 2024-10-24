@@ -42,6 +42,9 @@ public class GameController {
     @FXML
     private Label messageLabel;
 
+    @FXML
+    private ImageView sudokuBg;
+
     private Random rand;
 
     public void initialize() {
@@ -78,6 +81,8 @@ public class GameController {
         });
 
         messageLabel.setWrapText(true);
+
+        sudokuBg.setImage(new Image(getClass().getResource("/com/example/project_2/images/sudoku-bg.png").toExternalForm()));
     }
     public void createTextField(){
         //Rows
@@ -85,6 +90,7 @@ public class GameController {
             //Columns
             for (int f = 0; f < 6; f++) {
                 txt[i][f] = new TextField();
+                txt[i][f].setStyle("-fx-background-color: transparent; -fx-text-fill: black;-fx-font-size: 23; -fx-alignment: center; -fx-font: Old English Text MT");
                 onKeyTxtPressed(txt[i][f],i,f);
                 gridPane.add(txt[i][f],f,i);
                 if(game.getInitialNumber(i, f)==1){
@@ -148,7 +154,7 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
                     System.out.println("La fila es" + row + "La columna es" + col);
                     if (game.isNumberCorrect(keyEvent.getText(), row, col)) {
                         System.out.println("Son iguales");
-                        txt.setStyle("-fx-background-color: green;");
+                        txt.setStyle("-fx-background-color: transparent; -fx-font-weight: bold; -fx-text-fill: #00ff00;-fx-font-size: 23; -fx-alignment: center; -fx-font: Old English Text MT");
                         txt.setEditable(false);
                         game.setPoints(game.getPoints() + 1);
                         System.out.println("Llevas " + game.getPoints());
@@ -160,7 +166,7 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
 
                     } else if ((!game.isNumberCorrect(keyEvent.getText(), row, col)) && game.numberComprobation(keyEvent.getText())) {
                         System.out.println("NO son iguales");
-                        txt.setStyle("-fx-background-color: red;");
+                        txt.setStyle("-fx-background-color: transparent; -fx-font-weight: bold; -fx-text-fill: #ff0000;-fx-font-size: 23; -fx-alignment: center; -fx-font: Old English Text MT");
                         game.setRemainingLives(game.getRemainingLives() - 1);
                         System.out.println("Llevas vidas: " + game.getRemainingLives());
                         heartsChange();
@@ -194,6 +200,7 @@ public void setWinOrLose(){
         livesImageView.setFitWidth(200);
         remainingLivesTxt.setEffect(null);
         livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/trophy.png").toExternalForm()));
+        messageLabel.setLayoutY(295);
     }else if (game.getGameStatus() == 2) {
         messageLabel.setText("Perdiste el juego :(");
     }
@@ -214,7 +221,7 @@ public void setWinOrLose(){
             } while (!txt[rand1][rand2].getText().isEmpty());
             txt[rand1][rand2].setText(game.getNumber(rand1, rand2));
             txt[rand1][rand2].setEditable(false);
-            txt[rand1][rand2].setStyle("-fx-background-color: green;");
+            txt[rand1][rand2].setStyle("-fx-background-color: transparent; -fx-font-weight: bold; -fx-text-fill: #00ff00;-fx-font-size: 23; -fx-alignment: center; -fx-font: Old English Text MT");
             game.setHintNumber(game.getHintNumber()+1);
             if (game.getHintNumber() == 3) {
                 messageLabel.setText("Esa fué tu última pista :(");
