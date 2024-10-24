@@ -157,6 +157,7 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
                 if (lenght != 1) {
                     messageLabel.setText("Ingresa solo un caracter");
                     txt.setText("");
+                    return;
                 }
                 if (game.numberComprobation(keyEvent.getText())) {
                     System.out.println(txt.getText());
