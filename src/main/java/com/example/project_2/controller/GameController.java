@@ -40,8 +40,6 @@ public class GameController {
     @FXML
     private Label messageLabel;
 
-    int hintCounter = 0;
-    int mistakesCounter = 0;
 
 
     public void initialize() {
@@ -141,14 +139,14 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
     }
 
     public void hintAction()  {
-        hintCounter++;
-        if (hintCounter > 3) {
+        game.setHintNumber(game.getHintNumber()+1);
+        if (game.getHintNumber() > 3) {
             messageLabel.setText("Ups... parece que no tienes más pistas");
-        } else if (hintCounter == 3) {
+        } else if (game.getHintNumber() == 3) {
             messageLabel.setText("Esa fué tu última pista :(");
-        } else if (hintCounter == 2) {
+        } else if (game.getHintNumber() == 2) {
             messageLabel.setText("Te queda solo una pista...");
-        } else if (hintCounter == 1) {
+        } else if (game.getHintNumber() == 1) {
             messageLabel.setText("Todavía tienes dos pistas");
         }
 
