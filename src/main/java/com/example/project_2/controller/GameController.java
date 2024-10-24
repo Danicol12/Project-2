@@ -42,9 +42,6 @@ public class GameController {
     private Label messageLabel;
 
     private Random rand;
-    int hintCounter = 0;
-    int mistakesCounter = 0;
-
 
     public void initialize() {
         game=new Game();
@@ -98,87 +95,137 @@ public class GameController {
 
 
     }
+    public void returnAction() throws IOException {
+        WelcomeStage.getInstance();
+        GameStage.deleteInstance();
+    }
+
+
+
+
+
+
+
+
+    public void heartsChange(){
+        if(game.getRemainingLives()== 4){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/4-lives.png").toExternalForm()));
+        }
+        if(game.getRemainingLives()== 3){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/3-lives.png").toExternalForm()));
+        }
+        if(game.getRemainingLives()== 2){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/2-lives.png").toExternalForm()));
+        }
+        if(game.getRemainingLives()== 1){
+            livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/1-live.png").toExternalForm()));
+        }
+    }
+
+
+
+
+
+
+
 
 private void onKeyTxtPressed(final TextField txt, final int row, final int col) {
 
-        txt.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent keyEvent) {
-            if(game.getRemainingLives()!=0 && !keyEvent.getText().isEmpty() && txt.isEditable()){
-                if(game.numberComprobation(keyEvent.getText())) {
+    txt.setOnKeyReleased(new EventHandler<KeyEvent>() {
+        public void handle(KeyEvent keyEvent) {
+            int lenght = txt.getText().length();
+            if (game.getRemainingLives() != 0 && !keyEvent.getText().isEmpty() && txt.isEditable()) {
+                if (lenght != 1) {
+                    messageLabel.setText("Ingresa solo un caracter");
+                    txt.setText("");
+                }
+                if (game.numberComprobation(keyEvent.getText())) {
                     System.out.println(txt.getText());
                     System.out.println("La fila es" + row + "La columna es" + col);
                     if (game.isNumberCorrect(keyEvent.getText(), row, col)) {
                         System.out.println("Son iguales");
                         txt.setStyle("-fx-background-color: green;");
                         txt.setEditable(false);
-                        game.setPoints(game.getPoints()+1);
-                        System.out.println("Llevas "+game.getPoints());
+                        game.setPoints(game.getPoints() + 1);
+                        System.out.println("Llevas " + game.getPoints());
                         game.checkWinCondition();
-                        if(game.getGameStatus()==1){
+                        if (game.getGameStatus() == 1) {
                             System.out.println("Ganaste");
-                        } else if (game.getGameStatus()==2) {
+                        } else if (game.getGameStatus() == 2) {
                             System.out.println("Perdiste");
                         }
 
-                        }
-                    else if ((!game.isNumberCorrect(keyEvent.getText(), row, col)) && game.numberComprobation(keyEvent.getText())){
+                    } else if ((!game.isNumberCorrect(keyEvent.getText(), row, col)) && game.numberComprobation(keyEvent.getText())) {
                         System.out.println("NO son iguales");
                         txt.setStyle("-fx-background-color: red;");
-                        game.setRemainingLives(game.getRemainingLives()-1);
-                        System.out.println("Llevas vidas: "+game.getRemainingLives());
+                        game.setRemainingLives(game.getRemainingLives() - 1);
+                        System.out.println("Llevas vidas: " + game.getRemainingLives());
+                        heartsChange();
                         game.checkWinCondition();
-                        if(game.getGameStatus()==1){
+                        if (game.getGameStatus() == 1) {
                             System.out.println("Ganaste");
-                        } else if (game.getGameStatus()==2) {
+                        } else if (game.getGameStatus() == 2) {
                             System.out.println("Perdiste");
                         }
 
                     }
 
 
-
-                }
-                else if (!game.numberComprobation(keyEvent.getText())) {
+                } else if (!game.numberComprobation(keyEvent.getText())) {
                     System.out.println("No son  iguales");
                     txt.setText("");
                 }
 
 
 
-
             }
-
-            }
-        });
-}
-
-    public void returnAction() throws IOException {
-        WelcomeStage.getInstance();
-        GameStage.deleteInstance();
-    }
-
-    public void hintAction()  {
-        hintCounter++;
-        int rand1;
-        int rand2;
-        do {
-            rand1 =rand.nextInt(6);
-            rand2=rand.nextInt(6);
-        }while (!txt[rand1][rand2].getText().isEmpty());
-        txt[rand1][rand2].setText(game.getNumber(rand1, rand2));
-        txt[rand1][rand2].setEditable(false);
-        txt[rand1][rand2].setStyle("-fx-background-color: green;");
-        if (hintCounter > 3) {
-            messageLabel.setText("Ups... parece que no tienes más pistas");
-        } else if (hintCounter == 3) {
-            messageLabel.setText("Esa fué tu última pista :(");
-        } else if (hintCounter == 2) {
-            messageLabel.setText("Te queda solo una pista...");
-        } else if (hintCounter == 1) {
-            messageLabel.setText("Todavía tienes dos pistas");
         }
 
 
+    });
+}
+
+
+
+
+    public void hintAction() {
+
+        System.out.println(game.getHintNumber());
+        int rand1 = 0;
+        int rand2 = 0;
+        if (game.getHintNumber()<3) {
+            do {
+                rand1 = rand.nextInt(6);
+                rand2 = rand.nextInt(6);
+            } while (!txt[rand1][rand2].getText().isEmpty());
+            txt[rand1][rand2].setText(game.getNumber(rand1, rand2));
+            txt[rand1][rand2].setEditable(false);
+            txt[rand1][rand2].setStyle("-fx-background-color: green;");
+            game.setHintNumber(game.getHintNumber()+1);
+            if (game.getHintNumber() == 3) {
+                messageLabel.setText("Esa fué tu última pista :(");
+            } else if (game.getHintNumber() == 2) {
+                messageLabel.setText("Te queda solo una pista...");
+            } else if (game.getHintNumber() == 1) {
+                messageLabel.setText("Todavía tienes dos pistas");
+            }
+
+        }
+        if (game.getHintNumber()>=3) {
+            messageLabel.setText("Ups... parece que no tienes más pistas");
+        }
     }
 
+
+
+
+
+
+
 }
+
+
+
+
+
+
