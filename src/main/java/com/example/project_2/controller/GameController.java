@@ -99,10 +99,10 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
         txt.setOnKeyReleased(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent keyEvent) {
               int lenght = txt.getText().length();
-              if(lenght == 1) {
-                  if (game.getRemainingLives() != 0 && !keyEvent.getText().isEmpty() && txt.isEditable()) {
+              if(lenght <= 1) {
+                  if (game.getRemainingLives() != 0 && !keyEvent.getText().isEmpty() && txt.isEditable() && game.getGameStatus() ==0) {
                       System.out.println("peneeeeeeeeeeeeeeeeeeee");
-                      System.out.println(txt.getText().length());
+                      System.out.println(game.getGameStatus());
                       if (game.numberComprobation(keyEvent.getText())) {
                           System.out.println(txt.getText());
                           System.out.println("La fila es" + row + "La columna es" + col);
@@ -123,12 +123,20 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
                       }
 
 
+                  } else if (game.getGameStatus() == 1) {
+                      messageLabel.setText("Ganaste el juego ");
+                      livesImageView.setFitHeight(157);
+                      livesImageView.setFitWidth(200);
+                      remainingLivesTxt.setText("");
+                      livesImageView.setImage(new Image(getClass().getResource("/com/example/project_2/images/trophy.png").toExternalForm()));
+                  } else if (game.getGameStatus() == 2) {
+                      messageLabel.setText("Perdiste el juego :(");
                   }
               } else if (lenght != 1) {
                   messageLabel.setText("Ingresa solo un caracter");
                   txt.setText("");
               }
-
+                game.checkWinCondition();
             }
         });
 }

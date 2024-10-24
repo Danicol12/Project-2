@@ -29,6 +29,7 @@ public class Game {
     }
     public void checkWinCondition() {
         if(points==24){gameStatus=1;}
+        if (remainingLives == 0){gameStatus=2;}
     }
     public boolean numberComprobation(String word) {
 
