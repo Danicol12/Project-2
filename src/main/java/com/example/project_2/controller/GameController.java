@@ -12,6 +12,7 @@ import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
@@ -176,7 +177,7 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
 
                 } else if (!game.numberComprobation(keyEvent.getText())) {
                     System.out.println("No son  iguales");
-                    txt.setText("");
+                      txt.setText("");
                 }
 
 
@@ -197,6 +198,8 @@ private void onKeyTxtPressed(final TextField txt, final int row, final int col) 
         int rand1 = 0;
         int rand2 = 0;
         if (game.getHintNumber()<3) {
+            game.setPoints(game.getPoints() + 1);
+            System.out.println("Puntos: "+game.getPoints());
             do {
                 rand1 = rand.nextInt(6);
                 rand2 = rand.nextInt(6);
